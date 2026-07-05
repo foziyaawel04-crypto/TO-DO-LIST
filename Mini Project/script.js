@@ -24,11 +24,7 @@ function displayTasks() {
             </li>`;
   }
   taskList.innerHTML = html;
-  
-  // ቆጣሪውን በገጹ ላይ ማደስ
   remainingCount.innerText = remaining;
-
-  // ሁሉም ታስኮች ካለቁ የበዓል መልእክት ማሳየት
   if (tasks.length > 0 && remaining === 0) {
     allDoneMsg.classList.add('visible');
   } else {
@@ -50,7 +46,7 @@ function addTask() {
   displayTasks();
 }
 function toggleTask(i) {
-  tasks[i].done = !tasks[i].done; // true የነበረውን false, false የነበረውን true ያደርገዋል
+  tasks[i].done = !tasks[i].done; 
   saveTasks();
   displayTasks();
 }
@@ -79,22 +75,17 @@ function loadTasks() {
   if (saved !== null) {
     tasks = JSON.parse(saved);
   }
-}// 10. በተኖቹ ሲጫኑ ፈንክሽኖቹ እንዲሰሩ ማገናኘት (Event Listeners)
+}
 addBtn.addEventListener('click', addTask);
 clearBtn.addEventListener('click', clearAll);
-
-// BONUS: የቀለም መቀየሪያ ሎጂክ (Color Picker)
 const colorCircles = document.querySelectorAll('.color-circle');
 colorCircles.forEach(circle => {
   circle.addEventListener('click', () => {
-    // አክቲቭ የሆነውን ክላስ ማንቀሳቀስ
     const currentActive = document.querySelector('.color-circle.active');
     if (currentActive) {
       currentActive.classList.remove('active');
     }
     circle.classList.add('active');
-    
-    // የበስተጀርባ ቀለሙን መቀየር
     document.body.style.backgroundColor = circle.dataset.color;
   });
 });
